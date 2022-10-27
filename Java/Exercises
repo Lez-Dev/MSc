@@ -1,0 +1,57 @@
+package org.example;
+
+import java.util.*;
+
+public class Exercise01 {
+    static Random rnd = new Random();
+    private static Scanner stdin = new Scanner(System.in);
+
+    public static void main(String[] args) {
+
+        System.out.println("Enter length of number line: \n");
+        int length = parselength(stdin.nextLine());
+        int numberedArray[] = fillNumberArray(length);
+        Arrays.sort(numberedArray);
+        //look up 'bubble sort'
+
+        int result = differenceBetweenIndexes(numberedArray);
+
+        System.out.printf("The largest gap in the number line is %d", result);
+
+
+    }
+
+    public static int parselength(String length) {
+            int number = Integer.parseInt(length);
+            if(number <= 0){
+                throw new NumberFormatException("Zero and negative numbers invalid");
+            }
+            return number;
+    }
+
+
+    public static int[] fillNumberArray(int lengthOfArray) {
+        System.out.println("Enter whole numbers: \n");
+        int[] numberArray = new int[lengthOfArray];
+
+        for (int i = 0; i < numberArray.length; i++) {
+            numberArray[i] = Integer.parseInt(stdin.nextLine());
+            if(numberArray[i] < 0){
+                throw new NumberFormatException("Negative numbers invalid");
+            }
+        }
+        return numberArray;
+    }
+
+    public static int differenceBetweenIndexes(int[] aray) {
+        int[] orderedArray = aray;
+        int biggestGap = 0;
+        for (int i = 0; i < orderedArray.length - 1; i++) {
+            int subResult = (orderedArray[i + 1] - orderedArray[i]);
+            if (subResult > biggestGap) {
+                biggestGap = subResult;
+            }
+        }
+        return biggestGap;
+    }
+}
